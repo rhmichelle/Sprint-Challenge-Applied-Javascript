@@ -20,12 +20,32 @@
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles')
 .then(response => {
-    console.log('Bootstrap Here', response.data.articles.bootstrap)
+    console.log('Bootstrap Here', response.data.articles)
     // console.log(response.data.articles.bootstrap[0].headline)
+
+    response.data.articles.javascript.forEach(obj => {
+        const newJSArticle = articleComponent(obj)
+        cardsContainer.appendChild(newJSArticle)
+    })
 
     response.data.articles.bootstrap.forEach(obj => {
         const newBootstrapArticle = articleComponent(obj)
         cardsContainer.appendChild(newBootstrapArticle)
+    })
+
+    response.data.articles.technology.forEach(obj => {
+        const newTechArticle = articleComponent(obj)
+        cardsContainer.appendChild(newTechArticle)
+    })
+
+    response.data.articles.node.forEach(obj => {
+        const newNodeArticle = articleComponent(obj)
+        cardsContainer.appendChild(newNodeArticle)
+    })
+
+    response.data.articles.jquery.forEach(obj => {
+        const newJQArticle = articleComponent(obj)
+        cardsContainer.appendChild(newJQArticle)
     })
 })
    
