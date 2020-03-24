@@ -23,19 +23,17 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles')
     console.log('Bootstrap Here', response.data.articles.bootstrap)
     // console.log(response.data.articles.bootstrap[0].headline)
 
-    // response.data.articles.bootstrap.forEach(articles => {
-    //     const newBootstrapArticle = articleComponent(articles)
-    //     cardsContainer.appendChild(newBootstrapArticle)
-    // })
-})
-    .then(response => {
-        console.log('Javascript Here', response.data.articles.javascript)
+    response.data.articles.bootstrap.forEach(obj => {
+        const newBootstrapArticle = articleComponent(obj)
+        cardsContainer.appendChild(newBootstrapArticle)
     })
+})
+   
 
 
 const cardsContainer = document.querySelector('.cards-container')
 
-const articleComponent = (articles) => {
+const articleComponent = (obj) => {
     const card = document.createElement('div')
     const headline = document.createElement('div')
     const author = document.createElement('div')
@@ -43,14 +41,20 @@ const articleComponent = (articles) => {
     const img = document.createElement('img')
     const authorsName = document.createElement('span')
 
+    card.appendChild(headline)
+    card.appendChild(author)
+    author.appendChild(imgContainer)
+    imgContainer.appendChild(img)
+    author.appendChild(authorsName)
+
     card.classList.add('card')
     headline.classList.add('headline')
     author.classList.add('author')
     imgContainer.classList.add('img-container')
 
-    headline.textContent = articles.headline
-    img.src = articles.authorPhoto
-    authorsName.textContent = articles.authorName
+    headline.textContent = obj.headline
+    img.src = obj.authorPhoto
+    authorsName.textContent = obj.authorName
 
     return card
 }
